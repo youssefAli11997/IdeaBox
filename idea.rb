@@ -48,4 +48,10 @@ class Idea
 		end
 	end
 
+	def self.update(id, new_idea)
+		database.transaction do |db|
+			db['ideas'][id] = {:title => new_idea.title, :description => new_idea.description}
+		end
+	end
+
 end

@@ -15,6 +15,20 @@ class IdeaBoxApp < Sinatra::Base
 		erb :index, :locals => {:ideas => Idea.all}
 	end
 
+	get '/:id' do |id|
+		erb :show, :locals => {:idea => Idea.find(id.to_i), :id => id}
+	end
+
+	get '/:id/edit' do |id|
+		erb :edit, :locals => {:idea => Idea.find(id.to_i), :id => id}
+	end
+
+	put '/:id' do |id|
+		idea = Idea.new(params[:idea_title], params[:idea_description])
+		Idea.update(id.to_i, idea)
+		redirect '/'
+	end
+
 	post '/' do
 		idea = Idea.new(params['idea_title'], params['idea_description'])
 		idea.save
