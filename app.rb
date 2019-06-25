@@ -1,4 +1,5 @@
 require './idea'
+require './idea_store'
 
 class IdeaBoxApp < Sinatra::Base
 	set :method_override, true
@@ -12,31 +13,31 @@ class IdeaBoxApp < Sinatra::Base
 	end
 
 	get '/' do
-		erb :index, :locals => {:ideas => Idea.all}
+		erb :index, :locals => {:ideas => IdeaStore.all}
 	end
 
 	get '/:id' do |id|
-		erb :show, :locals => {:idea => Idea.find(id.to_i), :id => id}
+		erb :show, :locals => {:idea => IdeaStore.find(id.to_i), :id => id}
 	end
 
 	get '/:id/edit' do |id|
-		erb :edit, :locals => {:idea => Idea.find(id.to_i), :id => id}
+		erb :edit, :locals => {:idea => IdeaStore.find(id.to_i), :id => id}
 	end
 
 	put '/:id' do |id|
 		idea = Idea.new(params[:idea_title], params[:idea_description])
-		Idea.update(id.to_i, idea)
+		IdeaStore.update(id.to_i, idea)
 		redirect '/'
 	end
 
 	post '/' do
 		idea = Idea.new(params['idea_title'], params['idea_description'])
-		idea.save
+		IdeaStore.create(idea)
 		redirect '/'
 	end
 
 	delete '/:id' do |id|
-		Idea.delete(id.to_i)
+		IdeaStore.delete(id.to_i)
 		redirect '/'
 	end
 
