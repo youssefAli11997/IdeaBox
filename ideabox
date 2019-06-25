@@ -1,8 +1,8 @@
 ---
 ideas:
-- :title: very good idea
-  :description: "this is a very good idea\r\n"
-- :title: bad idea
-  :description: this is a bad idea
+- :title: very bad idea
+  :description: this is a very bad idea
 - :title: great idea!
   :description: bla bla bla
+- :title: good idea
+  :description: this is a good idea
