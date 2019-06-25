@@ -2,5 +2,13 @@
 ideas:
 - :title: bad idea
   :description: this is a bad idea
-- :title: love
-  :description: i really love this whole world
+  :rank: -5
+  :id: 0
+- :title: good idea
+  :description: this is a very good idea
+  :rank: 19
+  :id: '1'
+- :title: great idea!
+  :description: this is a great idea
+  :rank: 35
+  :id: 2

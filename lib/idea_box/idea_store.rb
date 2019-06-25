@@ -8,13 +8,16 @@ class IdeaStore
 	def self.create(idea)
 		database.transaction do |db|
 			db['ideas'] ||= []
-			db['ideas'] << {title: idea.title, description: idea.description}
+			db['ideas'] << {title: idea.title,
+							description: idea.description,
+							rank: idea.rank,
+							id: idea.id}
 		end
 	end
 
 	def self.all
 	  raw_ideas.map do |data|
-	    Idea.new(data[:title], data[:description])
+	    Idea.new(data[:title], data[:description], data[:rank], data[:id])
 	  end
 	end
 
@@ -27,7 +30,7 @@ class IdeaStore
 	def self.find(id)
 		database.transaction do |db|
 			raw_idea = db['ideas'][id]
-			Idea.new(raw_idea[:title], raw_idea[:description])
+			Idea.new(raw_idea[:title], raw_idea[:description], raw_idea[:rank], raw_idea[:id])
 		end
 	end
 
@@ -39,7 +42,11 @@ class IdeaStore
 
 	def self.update(id, new_idea)
 		database.transaction do |db|
-			db['ideas'][id] = {:title => new_idea.title, :description => new_idea.description}
+			db['ideas'][id] = {:title => new_idea.title,
+							   :description => new_idea.description,
+							   :rank => new_idea.rank,
+							   :id => new_idea.id}
 		end
 	end
+
 end
